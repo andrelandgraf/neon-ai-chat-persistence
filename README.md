@@ -58,3 +58,12 @@ bun add workflow
 ```
 
 Follow the [Getting started on Next.js guide](https://useworkflow.dev/docs/getting-started/next) for all setup instructions.
+
+5. Install AI SDK and AI Elements
+
+Make sure to install [AI SDK v6](https://v6.ai-sdk.dev/docs/introduction).
+
+```bash
+bun add ai@beta @ai-sdk/react@beta
+bunx shadcn@latest add @ai-elements/all
+```
