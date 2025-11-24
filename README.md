@@ -50,3 +50,11 @@ bun add -D drizzle-kit @types/pg
 Follow the [Drizzle Postgres setup guide](https://orm.drizzle.team/docs/get-started/postgresql-new) for a step by step guide. Also, make sure to attach the database pool to your Vercel function to ensure it will be released properly on function shutdown - read more [here](https://vercel.com/guides/connection-pooling-with-functions).
 
 Optionally, configure the Neon MCP server by following the following the insturctions in the [MCP server README](https://github.com/neondatabase/mcp-server-neon) or by running `bunx neonctl@latest init`
+
+4. Set up Workflow Development Kit
+
+```bash
+bun add workflow
+```
+
+Follow the [Getting started on Next.js guide](https://useworkflow.dev/docs/getting-started/next) for all setup instructions.
