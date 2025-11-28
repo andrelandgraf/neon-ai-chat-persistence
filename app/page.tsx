@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { checkDbConnection } from "@/db/client";
+import { v7 as uuidv7 } from "uuid";
+import { MessageSquare } from "lucide-react";
+import { checkDbConnection } from "@/lib/db/client";
 import { ModeToggle } from "@/components/theme-toggle";
 
 export default async function Home() {
   const result = await checkDbConnection();
+  const newChatId = uuidv7();
   return (
     <div className="flex min-h-screen flex-col">
       <div className="mx-auto flex w-full max-w-md flex-1 flex-col px-5 md:max-w-lg md:px-0 lg:max-w-xl">
@@ -38,6 +41,13 @@ export default async function Home() {
             Workflow Development Kit, AI SDK v6, Shadcn & AI Elements.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5 md:mt-9 lg:mt-10">
+            <Link
+              className="group flex items-center gap-2 rounded-full bg-[#00E599] px-4 py-2 text-sm font-medium text-black transition-all hover:bg-[#00cc88]"
+              href={`/chats/${newChatId}`}
+            >
+              <MessageSquare className="h-4 w-4" />
+              New chat
+            </Link>
             <Link
               className="group flex items-center gap-2 leading-none tracking-tight"
               href="https://github.com/neondatabase-labs/vercel-marketplace-neon"

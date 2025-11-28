@@ -26,5 +26,3 @@
 - Use next/font + next/script when applicable
 - next/image above the fold should have `sync` / `eager` / use `priority` sparingly
 - Be mindful of serialized prop size for RSC → child components
-
-

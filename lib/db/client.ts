@@ -1,14 +1,14 @@
-import { Pool } from "pg";
 import { attachDatabasePool } from "@vercel/functions";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import * as schema from "./schema";
 
-let db: Pool | null = null;
-export function getDb() {
-  if (!db) {
-    db = new Pool({ connectionString: process.env.DATABASE_URL });
-    attachDatabasePool(db);
-  }
-  return db;
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+attachDatabasePool(pool);
+
+export const db = drizzle({ client: pool, schema });
 
 /**
  * Helper function to check if the database is connected.
@@ -20,8 +20,7 @@ export async function checkDbConnection() {
     return "No DATABASE_URL environment variable";
   }
   try {
-    const db = getDb();
-    const result = await db.query("SELECT version()");
+    const result = await db.execute("SELECT version()");
     console.log("Pg version:", result);
     return "Database connected";
   } catch (error) {

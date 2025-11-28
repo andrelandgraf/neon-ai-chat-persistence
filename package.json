@@ -1,5 +1,5 @@
 {
-  "name": "neon-agent-workflow-persistence",
+  "name": "neon-ai-chat-persistence",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
     "workflow:dev": "workflow inspect runs --web"
   },
   "dependencies": {
-    "@ai-sdk/react": "^3.0.0-beta.111",
+    "@ai-sdk/react": "^3.0.0-beta.124",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -44,7 +44,7 @@
     "@radix-ui/react-use-controllable-state": "^1.2.2",
     "@vercel/functions": "^3.3.3",
     "@xyflow/react": "^12.9.3",
-    "ai": "^5.0.101",
+    "ai": "^6.0.0-beta.124",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -70,8 +70,8 @@
     "tailwind-merge": "^3.4.0",
     "tokenlens": "^1.3.1",
     "use-stick-to-bottom": "^1.1.1",
+    "uuid": "^13.0.0",
     "vaul": "^1.1.2",
-    "workflow": "^4.0.1-beta.19",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -80,6 +80,7 @@
     "@types/pg": "^8.15.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^10.0.0",
     "babel-plugin-react-compiler": "1.0.0",
     "drizzle-kit": "^0.31.7",
     "prettier": "^3.6.2",

@@ -1,6 +1,6 @@
 # Template - Neon Agent Workflow Persistence
 
-Persist AI SDK messages to your Neon database.
+Persist AI SDK chats and messages to your Neon database.
 
 ## Stack
 
@@ -99,14 +99,6 @@ bun add -D drizzle-kit @types/pg
 Follow the [Drizzle Postgres setup guide](https://orm.drizzle.team/docs/get-started/postgresql-new) for step-by-step instructions. Attach the database pool to your Vercel function to ensure it releases properly on function shutdown. For more information, see the [Vercel connection pooling guide](https://vercel.com/guides/connection-pooling-with-functions).
 
 Optionally, configure the Neon MCP server by following the instructions in the [MCP server README](https://github.com/neondatabase/mcp-server-neon) or by running `bunx neonctl@latest init`.
-
-4. Set up Workflow Development Kit
-
-```bash
-bun add workflow
-```
-
-Refer to the [Getting started on Next.js guide](https://useworkflow.dev/docs/getting-started/next) for setup instructions.
 
 5. Install AI SDK and AI Elements
 
