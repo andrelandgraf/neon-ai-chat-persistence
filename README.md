@@ -1,6 +1,6 @@
 # Template - Neon Agent Workflow Persistence
 
-Persist AI SDK chats and messages to your Neon database. Message parts are stored in typed, separate tables rather than JSONB, enforcing schema for supported tools and data parts via typed columns and enums. This makes it easier to version control and migrate as tools evolve over time.
+Persist AI SDK chats and messages to your Neon database. Message parts are stored in separate, typed tables rather than JSONB, enforcing schema for supported tools and data parts via typed columns and enums. This makes it easier to version control and migrate as tools evolve over time.
 
 ## Stack
 
@@ -14,11 +14,13 @@ Persist AI SDK chats and messages to your Neon database. Message parts are store
 
 ## Getting Started
 
-Click the "Deploy" button to clone this repository, create a new Vercel project, set up the Neon integration, and provision a new Neon database:
+1. Click the "Deploy" button to clone this repository, create a new Vercel project, set up the Neon integration, and provision a new Neon database:
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fandrelandgraf%2Fneon-ai-chat-persistence%2Ftree%2Fmain&project-name=my-neon-ai-chat-app&repository-name=my-neon-ai-chat-app&products=[{%22type%22:%22integration%22,%22integrationSlug%22:%22neon%22,%22productSlug%22:%22neon%22,%22protocol%22:%22storage%22}])
 
-Once the process is complete, you can clone the newly created GitHub repository and start making changes locally.
+2. Next, enable the Vercel AI Gateway for the project. Learn more [here](https://vercel.com/ai-gateway).
+
+3. Once the process is complete, you can play around with the deployed template and clone the newly created GitHub repository to start making changes locally.
 
 ## Local Setup
 
@@ -55,7 +57,7 @@ bun run db:migrate
 
 5. Get your Vercel AI Gateway API Key
 
-Create a new Vercel AI Gateway API Key [here](https://vercel.com/ai-gateway) and add it to your `.env` file:
+If you deployed via Vercel, run `vercel env pull` to fetch the environment variables. Otherwise, create a Vercel AI Gateway API Key [here](https://vercel.com/ai-gateway) and add it to your `.env` file:
 
 ```txt
 AI_GATEWAY_API_KEY=<your-string-here>
