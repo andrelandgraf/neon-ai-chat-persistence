@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages } from "ai";
+import { streamText, convertToModelMessages, stepCountIs } from "ai";
 import type { ChatAgentUIMessage } from "@/lib/chat/types";
 import { allTools } from "@/lib/ai/tools";
 import {
@@ -35,6 +35,7 @@ export async function POST(
     system: systemPrompt,
     messages: convertToModelMessages(history),
     tools: allTools,
+    stopWhen: stepCountIs(10),
   });
 
   return result.toUIMessageStreamResponse({

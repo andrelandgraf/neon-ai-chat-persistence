@@ -5,7 +5,7 @@ import { allTools } from "@/lib/ai/tools";
 const metadataSchema = z.object({});
 type ChatMetadata = z.infer<typeof metadataSchema>;
 
-/* 
+/*
  * Data parts allow streaming custom structured data to the client.
  * This example defines a "progress" data part for status updates.
  * Use dataStream.writeData({ type: "data-progress", data: { text: "..." } })

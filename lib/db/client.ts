@@ -20,8 +20,7 @@ export async function checkDbConnection() {
     return "No DATABASE_URL environment variable";
   }
   try {
-    const result = await db.execute("SELECT version()");
-    console.log("Pg version:", result);
+    await db.execute("SELECT version()");
     return "Database connected";
   } catch (error) {
     console.error("Error connecting to the database:", error);
