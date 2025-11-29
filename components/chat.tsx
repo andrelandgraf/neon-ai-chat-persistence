@@ -227,11 +227,7 @@ export function Chat({ chatId, initialMessages }: ChatProps) {
             disabled={isLoading || !input.trim()}
             className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#00E599] text-black transition-colors hover:bg-[#00cc88] disabled:opacity-50"
           >
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <SendHorizontal className="h-5 w-5" />
-            )}
+            {isLoading ? <Loader /> : <SendHorizontal className="h-5 w-5" />}
           </button>
         </form>
       </div>
