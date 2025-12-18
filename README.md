@@ -1,12 +1,11 @@
 # Template - Neon Agent Workflow Persistence
 
-Persist AI SDK chats and messages to your Neon database. Message parts are stored in separate, typed tables rather than JSONB, enforcing schema for supported tools and data parts via typed columns and enums. This makes it easier to version control and migrate as tools evolve over time.
+Persist AI SDK chats and messages to your Neon database. Message parts are stored in separate tables, rather than JSONB. This makes it easier to enforce the schema and version control as the AI SDK and message parts evolve over time.
 
 ## Stack
 
 - Full-stack framework: **Next.js**
 - ORM: **Drizzle**
-- Agent runtime: **Workflow Development Kit**
 - Agent framework: **AI SDK v6**
 - UI components: **Shadcn & AI Elements**
 - Database: **Neon Serverless Postgres**
@@ -188,7 +187,7 @@ const prefix: string = "Assertion failed";
 
 export default function assert(
   condition: any,
-  message?: string | (() => string),
+  message?: string | (() => string)
 ): asserts condition {
   if (condition) {
     return;
@@ -232,83 +231,11 @@ Key functions:
 
 ### API Route with Persistence
 
-Create the chat API route at `app/api/chats/[chatId]/route.ts`:
-
-```typescript
-import { streamText, convertToModelMessages, stepCountIs } from "ai";
-import type { ChatAgentUIMessage } from "@/lib/chat/types";
-import { allTools } from "@/lib/ai/tools";
-import {
-  ensureChatExists,
-  persistMessage,
-  getChatMessages,
-  convertDbMessagesToUIMessages,
-} from "@/lib/db/queries/chat";
-
-const systemPrompt = `You are a tweet drafting assistant...`;
-
-export async function POST(
-  req: Request,
-  { params }: { params: Promise<{ chatId: string }> },
-) {
-  const { chatId } = await params;
-  const { message }: { message: ChatAgentUIMessage } = await req.json();
-
-  // Ensure chat exists before persisting messages
-  await ensureChatExists(chatId);
-
-  // Persist user message first
-  await persistMessage({ chatId, message });
-
-  // Get full conversation history for context
-  const dbMessages = await getChatMessages(chatId);
-  const history = convertDbMessagesToUIMessages(dbMessages);
-
-  const result = streamText({
-    model: "google/gemini-2.5-pro-preview-05-06",
-    system: systemPrompt,
-    messages: convertToModelMessages(history),
-    tools: allTools,
-    stopWhen: stepCountIs(10),
-  });
-
-  return result.toUIMessageStreamResponse({
-    onFinish: async ({ responseMessage }) => {
-      // Persist assistant response after streaming completes
-      await persistMessage({
-        chatId,
-        message: responseMessage as ChatAgentUIMessage,
-      });
-    },
-  });
-}
-```
+Create the chat API route at `app/api/chats/[chatId]/route.ts`. See the full implementation in `app/api/chats/[chatId]/route.ts`.
 
 ### Chat Page
 
-Create the chat page at `app/chats/[chatId]/page.tsx` that loads existing messages from the database:
-
-```tsx
-import { Chat } from "@/components/chat";
-import {
-  getChatMessages,
-  convertDbMessagesToUIMessages,
-} from "@/lib/db/queries/chat";
-
-interface PageProps {
-  params: Promise<{ chatId: string }>;
-}
-
-export default async function ChatPage({ params }: PageProps) {
-  const { chatId } = await params;
-
-  // Load existing messages and convert to UI format
-  const dbMessages = await getChatMessages(chatId);
-  const history = convertDbMessagesToUIMessages(dbMessages);
-
-  return <Chat chatId={chatId} initialMessages={history} />;
-}
-```
+Create the chat page at `app/chats/[chatId]/page.tsx`. See the full implementation in `app/chats/[chatId]/page.tsx`.
 
 ### Chat Component
 
