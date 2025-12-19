@@ -49,7 +49,11 @@ export async function POST(
         writer.write({ type: "start" });
         writer.write({ type: "start-step" });
         writer.write({ type: "text-start", id: textId });
-        writer.write({ type: "text-delta", id: textId, delta: RATE_LIMIT_MESSAGE });
+        writer.write({
+          type: "text-delta",
+          id: textId,
+          delta: RATE_LIMIT_MESSAGE,
+        });
         writer.write({ type: "text-end", id: textId });
         writer.write({ type: "finish-step" });
         writer.write({ type: "finish", finishReason: "stop" });
